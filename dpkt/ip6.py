@@ -114,7 +114,7 @@ class IP6(dpkt.Packet):
 
     def __bytes__(self):
         self.p, hdr_str = self.headers_str()
-        if (self.p == 6 or self.p == 17 or self.p == 58) and not self.data.sum:
+        if (self.p == 6 or self.p == 17 or self.p == 58) and self.extension_hdrs.get(44) is None and isinstance(self.data, dpkt.Packet) and self.data.sum == 0:
             # XXX - set TCP, UDP, and ICMPv6 checksums
             p = bytes(self.data)
             s = struct.pack('>16s16sxBH', self.src, self.dst, self.p, len(p))
