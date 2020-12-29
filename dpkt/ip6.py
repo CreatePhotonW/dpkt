@@ -258,7 +258,7 @@ class IP6FragmentHeader(IP6ExtensionHeader):
 
     @m_flag.setter
     def m_flag(self, v):
-        self.frag_off_resv_m = (self.frag_off_resv_m & ~0xfffe) | v
+        self.frag_off_resv_m = (self.frag_off_resv_m & 0xfffe) | v
 
 
 class IP6AHHeader(IP6ExtensionHeader):
